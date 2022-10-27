@@ -11,6 +11,9 @@ function App() {
         setTasks([...tasks, {id: Math.random(), title: newTask, status: statuses[0]}])
         setNewTask('')
     }
+    const moveTask = (id, value) => {
+      setTasks(tasks.map(task => task.id === id ? {...task, status: statuses[statuses.indexOf(task.status) + value]} : task))
+    }
     const deleteTask = (id) => {
       setTasks(tasks.filter(task => task.id !== id))
     }
@@ -18,7 +21,7 @@ function App() {
         <div className="App">
             <input placeholder='add new task' value={newTask} onChange={e => setNewTask(e.target.value)}/>
             <button onClick={addTask}>add task</button>
-            <Panel statuses={statuses} tasks={tasks} deleteTask={deleteTask}/>
+            <Panel statuses={statuses} tasks={tasks} deleteTask={deleteTask} moveTask={moveTask}/>
         </div>
     );
 }

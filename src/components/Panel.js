@@ -11,7 +11,9 @@ function Panel(props) {
         <h3>
           {status}
         </h3>
-        {props.tasks.filter(task => status === task.status).map(task => <Task deleteTask={props.deleteTask} task={task} key={task.id} />)}
+        {props.tasks.filter(task => status === task.status).map(task => <Task deleteTask={props.deleteTask} task={task} key={task.id}
+                                                                              moveTask={props.moveTask}
+        />)}
       </div>
       )}
     </div>
