@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Panel from "./components/Panel";
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const statuses = ['Todo', 'Progress', 'Review', 'Done']
+    const [tasks, setTasks] = useState([])
+    const [newTask, setNewTask] = useState('')
+    const addTask = () => {
+        setTasks([...tasks, {id: Math.random(), title: newTask, status: statuses[0]}])
+        setNewTask('')
+    }
+    const deleteTask = (id) => {
+      setTasks(tasks.filter(task => task.id !== id))
+    }
+    return (
+        <div className="App">
+            <input placeholder='add new task' value={newTask} onChange={e => setNewTask(e.target.value)}/>
+            <button onClick={addTask}>add task</button>
+            <Panel statuses={statuses} tasks={tasks} deleteTask={deleteTask}/>
+        </div>
+    );
 }
 
 export default App;
